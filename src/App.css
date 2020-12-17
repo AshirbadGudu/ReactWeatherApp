@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,18 +13,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .login_form,
 .register_form {
   box-shadow: 1px 1px 10px #fff3;
@@ -46,6 +23,7 @@
 .App-Container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .app-btn {
   display: inline-block;

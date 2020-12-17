@@ -1,10 +1,16 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 
 const API_KEY = "df82f4bd92424e1aa29150115201612";
-const BASE_URL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
+const BASE_URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
 const URL = `${BASE_URL}&q=`;
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
 function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -65,19 +71,33 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (lat && lon) {
-      fetch(`${URL}${lat},${lon}`).then((response) => {
-        response.json().then((data) => {
-          setWeatherData(data);
+    const expiresTime = new Date(
+      new Date().setHours(new Date().getHours() + 1)
+    );
+
+    const expiresOn = "expires=" + expiresTime.toUTCString();
+
+    if (getCookie("weatherData")) {
+      const cookieWeatherData = JSON.parse(getCookie("weatherData"));
+      setWeatherData(cookieWeatherData);
+    } else {
+      if (lat && lon) {
+        fetch(`${URL}${lat},${lon}`).then((response) => {
+          response.json().then((data) => {
+            setWeatherData(data);
+
+            document.cookie =
+              "weatherData" + "=" + JSON.stringify(data) + ";" + expiresOn;
+          });
         });
-      });
+      }
     }
   }, [lat, lon]);
-  console.log(weatherData);
+
   return (
     <div className="App">
       <main className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>React Weather App</h1>
         <p>
           {currentUser ? `Welcome ${currentUser.email}` : "Login or Register."}
         </p>
