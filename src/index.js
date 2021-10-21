@@ -1,6 +1,12 @@
 import "index.css";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "App";
+import { Loader } from "components/core";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Suspense fallback={<Loader />}>
+    <App />
+  </Suspense>,
+  document.getElementById("root")
+);

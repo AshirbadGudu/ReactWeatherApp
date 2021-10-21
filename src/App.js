@@ -1,8 +1,6 @@
-import Header from "components/Header";
-import Home from "pages/Home";
-import Login from "pages/Login";
-import Register from "pages/Register";
 import { useEffect, useState } from "react";
+import { Home, Login, Register } from "pages";
+import { Header } from "components";
 
 const API_KEY = "df82f4bd92424e1aa29150115201612";
 const BASE_URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
