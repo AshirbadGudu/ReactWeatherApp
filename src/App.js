@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Home, Login, Register } from "pages";
 import { Header } from "components";
+import { useAppContext } from "contexts";
 
 const API_KEY = "df82f4bd92424e1aa29150115201612";
 const BASE_URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
@@ -13,11 +14,12 @@ const getCookie = (name) => {
 };
 
 const App = () => {
+  const { currentUser, setCurrentUser } = useAppContext();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [currentUser, setCurrentUser] = useState(null);
+
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [weatherData, setWeatherData] = useState(null);
